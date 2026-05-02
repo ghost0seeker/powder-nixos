@@ -97,20 +97,24 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
- # Enable Plasma 
-  services.desktopManager.plasma6.enable = true;
+#  # Enable Plasma 
+   services.desktopManager.plasma6.enable = true;
 
-  # Default display manager for Plasma
-  services.displayManager.sddm = {
-    enable = true;
+#   # Default display manager for Plasma
+   services.displayManager.sddm = {
+     enable = true;
   
-  # To use Wayland (Experimental for SDDM)
-    wayland.enable = true;
-  };
-
+   # To use Wayland (Experimental for SDDM)
+     wayland.enable = true;
+   };
+#  environment.pathsToLink = [ 
+#     "/share/applications" 
+#     "/share/xdg-desktop-portal" 
+#   ];
 
   hardware.graphics = {
-	enable = true;
+    enable = true;
+    enable32Bit = true; # Essential for Steam
   };
 
   services.xserver.videoDrivers = ["nvidia"];
