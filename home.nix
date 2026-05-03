@@ -35,6 +35,7 @@
     python313Packages.kde-material-you-colors
     nerd-fonts.sauce-code-pro
     nerd-fonts.terminess-ttf
+    caligula
   ]; 
 
   programs.starship.enable = true;
