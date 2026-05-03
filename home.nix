@@ -32,7 +32,9 @@
     gearlever
     python314
     appimage-run
-    pkgs.python313Packages.kde-material-you-colors
+    python313Packages.kde-material-you-colors
+    nerd-fonts.sauce-code-pro
+    nerd-fonts.terminess-ttf
   ]; 
 
   programs.starship.enable = true;
@@ -48,6 +50,17 @@
       };
     };
   };
+
+# Create a proper KDE-compliant autostart entry
+  home.file.".config/autostart/kde-material-you-colors.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=KDE Material You Colors
+    Exec=kde-material-you-colors
+    Icon=color-management
+    Terminal=false
+    X-KDE-autostart-after=panel
+  '';
 
   # programs.niri.enable = true;
 
