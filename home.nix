@@ -3,8 +3,8 @@
 {
   imports = [
     inputs.dms.homeModules.dank-material-shell
-    inputs.niri.homeModules.niri
-    inputs.dms.homeModules.niri
+    # inputs.niri.homeModules.niri
+    # inputs.dms.homeModules.niri
   ];
 
   home.stateVersion = "25.11";
@@ -14,7 +14,7 @@
     vim
     neovim
     fish
-    kitty
+    # kitty
     moonlight-qt
     btop
     htop
@@ -32,6 +32,7 @@
     gearlever
     python314
     appimage-run
+    pkgs.python313Packages.kde-material-you-colors
   ]; 
 
   programs.starship.enable = true;
@@ -48,13 +49,56 @@
     };
   };
 
-  programs.niri.enable = true;
+  # programs.niri.enable = true;
+
+  #programs.kitty.enable = true; # required for the default Hyprland config
+
+  programs.kitty = {
+    enable = true;
+    
+    # The theme name matches what Nixpkgs provides
+    theme = "Tokyo Night Moon";
+
+    font = {
+      name = "SauceCodePro Nerd Font Mono";
+      size = 16.0;
+    };
+
+    settings = {
+      # Font overrides
+      bold_font = "auto";
+      italic_font = "Terminess Nerd Font Mono";
+      bold_italic_font = "Terminess Nerd Font Mono Bold";
+
+      # Window Layout
+      remember_window_size = "no";
+      initial_window_width = "100c";
+      initial_window_height = "30c";
+
+      # Tab Bar
+      tab_bar_edge = "bottom";
+      tab_bar_style = "powerline";
+      tab_powerline_style = "slanted";
+      tab_title_template = "{title}{' :{}:'.format(num_windows) if num_windows > 1 else ''}";
+
+      # Animated Cursor (Kitty 0.30.0+)
+      cursor_trail = 200;
+      cursor_trail_decay = "0.1 0.4";
+      cursor_trail_start_threshold = 2;
+
+      # Background
+      background_opacity = "0.75";
+      background_blur = 32;
+    };
+  };
+
+  wayland.windowManager.hyprland.enable = false; # enable Hyprland
 
   programs.dank-material-shell = {
-    enable  = true;
-      niri = {
-      enableSpawn = true;      # Auto-start DMS with niri, if enabled
-    };
+    enable  = false;
+    #   niri = {
+    #   enableSpawn = true;      # Auto-start DMS with niri, if enabled
+    # };
     
     settings = {
       theme = "dark";

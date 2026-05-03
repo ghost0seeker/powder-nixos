@@ -2,11 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
+      inputs.dms.nixosModules.greeter
       ./hardware-configuration.nix
     ];
 
@@ -98,15 +99,25 @@
   # networking.firewall.enable = false;
 
 #  # Enable Plasma 
-   services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
-#   # Default display manager for Plasma
+  # Default display manager for Plasma
    services.displayManager.sddm = {
      enable = true;
   
    # To use Wayland (Experimental for SDDM)
      wayland.enable = true;
    };
+
+  # programs.hyprland.enable = true;
+
+  # programs.dank-material-shell.greeter = {
+  #   enable = true;
+  #   compositor.name = "hyprland";  # Or "hyprland" or "sway"
+  # };
+
+  #programs.niri.enable = true;
+
 #  environment.pathsToLink = [ 
 #     "/share/applications" 
 #     "/share/xdg-desktop-portal" 
@@ -157,5 +168,12 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+
 
 }
